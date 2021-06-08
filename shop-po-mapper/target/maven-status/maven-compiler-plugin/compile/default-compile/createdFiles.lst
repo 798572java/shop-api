@@ -1,0 +1,13 @@
+com\fh\shop\po\Order.class
+com\fh\shop\vo\CartSkuVo.class
+com\fh\shop\mapper\IMsgLogMapper.class
+com\fh\shop\param\OrderParam.class
+com\fh\shop\vo\SkuVo.class
+com\fh\shop\mapper\IOrderMapper.class
+com\fh\shop\po\OrderItem.class
+com\fh\shop\mapper\IMemberMapper.class
+com\fh\shop\mapper\ISkuMapper.class
+com\fh\shop\vo\SkuEmailVo.class
+com\fh\shop\po\Member.class
+com\fh\shop\mapper\IOrderItemMapper.class
+com\fh\shop\po\MsgLog.class

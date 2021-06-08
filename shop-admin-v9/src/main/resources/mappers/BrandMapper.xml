@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fh.shop.admin.mapper.brand.IBrandMapper">
+    
+    <insert id="addbrand" parameterType="com.fh.shop.admin.po.brand.Brand">
+      insert into t_brand (brandname,logo,createyear) values (#{brandName},#{logo},#{createYear})
+    </insert>
+
+    <sql id="brandWhere">
+        <where>
+            <if test="brandName!=null and brandName!= ''">
+                brandname like  concat('%',#{brandName},'%')
+            </if>
+        </where>
+    </sql>
+
+
+    <select id="findListCount" parameterType="com.fh.shop.admin.param.BrandQueryParam" resultType="long">
+
+        select count(*) from t_brand
+        <include refid="brandWhere"></include>
+
+    </select>
+    
+    <select id="findListPage" parameterType="com.fh.shop.admin.param.BrandQueryParam" resultType="com.fh.shop.admin.po.brand.Brand">
+        select t.* from
+        (select id,brandname,logo,createyear from t_brand
+        <include refid="brandWhere"></include>
+        order by id desc) t
+        limit #{start},#{length}
+    </select>
+
+
+
+    <delete id="deleteBrand" parameterType="long">
+        delete from t_brand where id=#{xjs};
+    </delete>
+
+
+    <select id="selectBrandById" parameterType="long" resultType="com.fh.shop.admin.po.brand.Brand">
+
+        select id,brandName,logo,createYear from t_brand where id=#{id}
+
+    </select>
+
+    <update id="updateBrand" parameterType="com.fh.shop.admin.po.brand.Brand">
+
+        update t_brand set brandName=#{brandName},logo=#{logo},createYear=#{createYear} where id=#{id}
+    </update>
+
+    <select id="selectListByidList" resultType="string">
+        select logo from t_brand where id in
+        <foreach collection="list" open="(" close=")" separator="," item="x">
+            #{x}
+        </foreach>
+    </select>
+
+
+    <delete id="deleteBatch">
+        delete from t_brand where id in
+        <foreach collection="list" open="(" close=")" separator="," item="x">
+            #{x}
+        </foreach>
+    </delete>
+
+    <select id="findInfo" resultType="com.fh.shop.admin.po.brand.Brand">
+        select id,brandName,logo,createYear from t_brand
+    </select>
+
+    <select id="selectByTypeId" parameterType="long" resultType="com.fh.shop.admin.po.brand.Brand">
+        select b.id,b.brandName from t_brand b left join t_type_brand tb
+        on b.id=tb.brandId where tb.typeId=#{v}
+    </select>
+
+
+    <select id="findListByTypeIdList" resultType="com.fh.shop.admin.po.brand.Brand">
+        select b.id,b.brandName from t_type_brand tb left join t_brand b on b.id=tb.brandId
+        where tb.typeId in
+        <foreach collection="collection" item="x" separator="," open="(" close=")" >
+            #{x}
+        </foreach>
+    </select>
+
+</mapper>

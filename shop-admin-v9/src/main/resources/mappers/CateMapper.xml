@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fh.shop.admin.mapper.cate.ICateMapper">
+
+
+<select id="findCate" resultType="com.fh.shop.api.po.Cate">
+    select  id,cateName,fatherId,typeId,typeName from t_cate
+</select>
+
+<insert id="addCate" parameterType="com.fh.shop.api.po.Cate">
+    insert into t_cate (cateName,fatherId,typeId,typeName) values
+    (#{cateName},#{fatherId},#{typeId},#{typeName})
+</insert>
+
+    <select id="findCateById" parameterType="long" resultType="com.fh.shop.api.po.Cate">
+        select id,cateName,fatherId,typeId,typeName from t_cate where id = #{x}
+    </select>
+
+
+    <update id="updateCate" parameterType="com.fh.shop.api.po.Cate">
+        update  t_cate set cateName=#{cateName},fatherId=#{fatherId},typeId=#{typeId},typeName=#{typeName}
+        where id=#{id}
+    </update>
+
+    <update id="updateType" parameterType="com.fh.shop.admin.param.CateParam">
+        update t_cate set typeId=#{cate.typeId},typeName=#{cate.typeName} where id in
+        <foreach collection="idsList" separator="," open="(" close=")" item="x">
+            #{x}
+        </foreach>
+    </update>
+
+
+    <delete id="deleteCate" >
+        delete from t_cate where id in
+        <foreach collection="list" item="x" close=")" open="(" separator="," >
+            #{x}
+        </foreach>
+    </delete>
+
+</mapper>

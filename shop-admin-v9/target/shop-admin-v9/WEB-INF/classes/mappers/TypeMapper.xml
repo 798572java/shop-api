@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fh.shop.admin.mapper.type.ITypeMapper">
+    
+<insert id="addType" parameterType="com.fh.shop.admin.po.type.Type">
+    <selectKey resultType="long" keyProperty="id" order="AFTER">
+        select last_insert_id();
+    </selectKey>
+    insert into t_type (typeName) values (#{typeName})
+</insert>
+
+    <sql id="typeWhere">
+        <where>
+            <if test="typeName !=null and typeName !=''">
+                typeName like concat('%',typeName,'%')
+            </if>
+        </where>
+    </sql>
+
+    <select id="selectTypeCount" parameterType="com.fh.shop.admin.param.TypeQueryParam" resultType="long">
+      select count(*) from t_type
+      <include refid="typeWhere"></include>
+    </select>
+
+
+<select id="selectTypeList" parameterType="com.fh.shop.admin.param.TypeQueryParam" resultType="com.fh.shop.admin.po.type.Type">
+    select t.* from
+    (select id,typeName from t_type
+    <include refid="typeWhere"></include>
+     order by id desc )t
+    limit #{start},#{length}
+</select>
+
+    <select id="selectTypeById" parameterType="long" resultType="com.fh.shop.admin.po.type.Type">
+          select id,typeName from t_type where id=#{x}
+    </select>
+
+
+    <update id="updateTypeName" parameterType="com.fh.shop.admin.po.type.Type">
+        update t_type set typeName=#{typeName} where id=#{id}
+    </update>
+
+    <delete id="deleteType" parameterType="long">
+        delete from t_type where id=#{v}
+    </delete>
+
+    <delete id="deleteBatchIds">
+        delete from t_type where id in
+        <foreach collection="list" separator="," item="x" open="(" close=")">
+            #{x}
+        </foreach>
+    </delete>
+
+    <select id="findAll" resultType="com.fh.shop.admin.po.type.Type">
+        select id,typeName from t_type
+    </select>
+
+</mapper>

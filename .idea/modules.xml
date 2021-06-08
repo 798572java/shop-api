@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://F:/软件/支付相关/pay/pay.iml" filepath="F:/软件/支付相关/pay/pay.iml" />
+      <module fileurl="file://$PROJECT_DIR$/shop.iml" filepath="$PROJECT_DIR$/shop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/shop-admin-v9/shop-admin-v9.iml" filepath="$PROJECT_DIR$/shop-admin-v9/shop-admin-v9.iml" />
+      <module fileurl="file://$PROJECT_DIR$/shop-api/shop-api.iml" filepath="$PROJECT_DIR$/shop-api/shop-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../shop-api-admin/shop-api-admin.iml" filepath="$PROJECT_DIR$/../shop-api-admin/shop-api-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../shop-api-book/shop-api-book.iml" filepath="$PROJECT_DIR$/../shop-api-book/shop-api-book.iml" />
+      <module fileurl="file://$PROJECT_DIR$/shop-api-springboot/shop-api-springboot.iml" filepath="$PROJECT_DIR$/shop-api-springboot/shop-api-springboot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/shop-biz/shop-biz.iml" filepath="$PROJECT_DIR$/shop-biz/shop-biz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/shop-mq/shop-mq.iml" filepath="$PROJECT_DIR$/shop-mq/shop-mq.iml" />
+      <module fileurl="file://$PROJECT_DIR$/shop-po-mapper/shop-po-mapper.iml" filepath="$PROJECT_DIR$/shop-po-mapper/shop-po-mapper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/shop-util/shop-util.iml" filepath="$PROJECT_DIR$/shop-util/shop-util.iml" />
+    </modules>
+  </component>
+</project>

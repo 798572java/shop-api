@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="shop-api-admin" />
+        <module name="shop-mq" />
+        <module name="shop-api-springboot" />
+        <module name="shop-api" />
+        <module name="shop-admin-v9" />
+        <module name="shop-api-book" />
+        <module name="shop-biz" />
+        <module name="shop-cloud" />
+        <module name="shop-util" />
+        <module name="shop-po-mapper" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="shop" target="1.5" />
+      <module name="shop-admin-v9" target="1.8" />
+      <module name="shop-api" target="1.8" />
+      <module name="shop-api-admin" target="1.8" />
+      <module name="shop-api-book" target="1.8" />
+      <module name="shop-api-brand" target="1.8" />
+      <module name="shop-api-cloud-demo" target="1.8" />
+      <module name="shop-api-springboot" target="1.8" />
+      <module name="shop-biz" target="1.5" />
+      <module name="shop-cloud" target="1.8" />
+      <module name="shop-mq" target="1.8" />
+      <module name="shop-po-mapper" target="1.8" />
+      <module name="shop-util" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="shop-api-admin" options="-parameters" />
+      <module name="shop-api-book" options="-parameters" />
+      <module name="shop-api-springboot" options="-parameters" />
+      <module name="shop-mq" options="-parameters" />
+    </option>
+  </component>
+</project>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fh.shop.admin.mapper.type.IAttrValueMapper">
+
+    <insert id="addBatch">
+        insert into t_attr_value (attrValue,attrId) values
+        <foreach collection="list" separator="," item="x">
+            (#{x.attrValue},#{x.attrId})
+        </foreach>
+    </insert>
+
+    <select id="selectAttrValue" resultType="com.fh.shop.admin.po.type.AttrValue">
+        select id,attrValue,attrId from t_attr_value where attrId in
+        <foreach collection="list" separator="," item="x" open="(" close=")">
+            #{x}
+        </foreach>
+    </select>
+
+    <delete id="deleteBatch">
+        delete from t_attr_value where attrId in
+        <foreach collection="list" separator="," item="x" open="(" close=")">
+            #{x}
+        </foreach>
+    </delete>
+
+    <delete id="deleteBatchByAttrList">
+        delete from t_attr_value where attrId in
+        <foreach collection="list" separator="," open="(" close=")" item="x">
+            #{x}
+        </foreach>
+    </delete>
+
+
+</mapper>

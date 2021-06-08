@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fh.shop.admin.mapper.goods.ISkuMapper">
+
+<insert id="addSku">
+    insert into t_sku (skuName,spuId,price,stock,specInfo,image,colorId) values
+    <foreach collection="list" separator="," item="x">
+        (#{x.skuName},#{x.spuId},#{x.price},#{x.stock},#{x.specInfo},#{x.image},#{x.colorId})
+    </foreach>
+</insert>
+
+
+</mapper>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fh.shop.admin.mapper.goods.ISpuMapper">
+
+    <sql id="spuWhere">
+        <where>
+            <if test="brandIds !=null and brandIds!=''">
+                brandId in
+                <foreach item="x" collection="brandIds.split(',')" open="(" separator="," close=")">
+                    #{x}
+                </foreach>
+            </if>
+            <if test="spuName !=null and spuName!=''">
+             and    spuName like concat('%',#{spuName},'%')
+            </if>
+            <if test="priceMin !=null">
+              and  price>= #{priceMin }
+            </if>
+            <if test="priceMax !=null" >
+                and  price &lt;= #{priceMax}
+            </if>
+            <if test="stockMin !=null" >
+                and  stock >= #{stockMin}
+            </if>
+            <if test="stockMax !=null">
+                and  stock &lt;= #{stockMax}
+            </if>
+            <if test="cate1!=null and cate1 > -1">
+                and cate1=#{cate1}
+            </if>
+            <if test="cate2!=null and cate2 > -1">
+                and cate2=#{cate2}
+            </if>
+            <if test="cate3!=null and cate3 > -1">
+                and cate3=#{cate3}
+            </if>
+        </where>
+    </sql>
+
+
+
+    <select id="findSpuCount" parameterType="com.fh.shop.admin.param.SpuQueryParam" resultType="long">
+        select count(*) from t_spu
+        <include refid="spuWhere"></include>
+    </select>
+
+    <select id="findpageSpuAll" parameterType="com.fh.shop.admin.param.SpuQueryParam" resultType="com.fh.shop.api.po.Spu">
+        select t.* from
+        (select id,spuName,stock,price,cateName,brandName,status,newOld,hot from t_spu
+        <include refid="spuWhere"></include>
+        order by id desc )t
+        limit #{start},#{length}
+    </select>
+
+</mapper>

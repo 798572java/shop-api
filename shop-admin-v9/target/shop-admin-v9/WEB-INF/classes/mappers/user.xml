@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fh.shop.admin.mapper.user.IUserMapper">
+
+
+<select id="fineUser"  parameterType="string" resultType="com.fh.shop.admin.po.user.User">
+    select id,userName,realName,password from t_user  where  userName=#{u}
+</select>
+
+
+    <sql id="Where">
+        <where>
+            <if test="userName !=null and userName !=''">
+                userName like concat ('%',#{userName},'%')
+            </if>
+            <if test="realName !=null and realName !=''">
+                and realName like concat ('%',#{realName},'%')
+            </if>
+            <if test="beginBirthday!=null">
+                and   birthday >= #{beginBirthday}
+            </if>
+            <if test="endBirthday !=null">
+                and   birthday &lt;= #{endBirthday}
+            </if>
+            <if test="sex!=null">
+                and   sex = #{sex}
+            </if>
+
+        </where>
+    </sql>
+
+
+    <select id="fineUserCount" parameterType="com.fh.shop.admin.param.UserParam" resultType="long">
+        select count(*)  from t_user
+        <include refid="Where"></include>
+    </select>
+
+
+    <select id="findUserList" parameterType="com.fh.shop.admin.param.UserParam" resultType="com.fh.shop.admin.po.user.User">
+        select t.* from
+        (select id,userName,passWord,realName,userPhoto,sex,mail,phone,birthday
+ from t_user
+        <include refid="Where"></include>
+ order by id desc)t
+        limit #{start},#{length};
+    </select>
+
+    <insert id="addBatch">
+        insert into t_user (userName,realName,sex,mail,phone,birthday) values
+        <foreach collection="list" item="x" separator=",">
+            (#{x.userName},#{x.realName},#{x.sex},#{x.mail},#{x.phone},#{x.birthday})
+        </foreach>
+    </insert>
+
+
+
+
+
+
+</mapper>
